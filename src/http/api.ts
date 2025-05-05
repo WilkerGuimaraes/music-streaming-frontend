@@ -62,9 +62,14 @@ export type GetAlbums200Item = {
   artistName: string;
 };
 
-export type GetAlbumsAlbumIdSongs200Item = {
+export type GetAlbumsAlbumIdSongs200SongsItem = {
   title: string;
   artistName: string;
+};
+
+export type GetAlbumsAlbumIdSongs200 = {
+  albumTitle?: string;
+  songs: GetAlbumsAlbumIdSongs200SongsItem[];
 };
 
 export type PostPlaylistsBody = {
@@ -239,7 +244,7 @@ export const getGetAlbumsAlbumIdSongsUrl = (albumId: string,) => {
   return `http://localhost:3333/albums/${albumId}/songs`
 }
 
-export const getAlbumsAlbumIdSongs = async (albumId: string, options?: RequestInit): Promise<GetAlbumsAlbumIdSongs200Item[]> => {
+export const getAlbumsAlbumIdSongs = async (albumId: string, options?: RequestInit): Promise<GetAlbumsAlbumIdSongs200> => {
   
   const res = await fetch(getGetAlbumsAlbumIdSongsUrl(albumId),
   {      
@@ -251,7 +256,7 @@ export const getAlbumsAlbumIdSongs = async (albumId: string, options?: RequestIn
 )
 
   const body = [204, 205, 304].includes(res.status) ? null : await res.text()
-  const data: GetAlbumsAlbumIdSongs200Item[] = body ? JSON.parse(body) : {}
+  const data: GetAlbumsAlbumIdSongs200 = body ? JSON.parse(body) : {}
 
   return data
 }
