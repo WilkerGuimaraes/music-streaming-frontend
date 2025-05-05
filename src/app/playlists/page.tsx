@@ -3,9 +3,10 @@
 import { getPlaylists } from "@/http/api";
 import { Dialog, DialogContent, DialogTrigger } from "../_components/ui/dialog";
 import { Button } from "../_components/ui/button";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Trash2Icon } from "lucide-react";
 import CreateNewPlaylist from "./_components/create-new-playlist";
 import { useEffect, useState } from "react";
+import { deletePlaylist } from "../_actions/delete-playlist";
 
 type Playlist = {
   id: string;
@@ -55,13 +56,28 @@ const PlaylistsPage = () => {
       ) : (
         <ul className="grid gap-2 lg:grid-cols-2">
           {playlists.map((playlist, index) => (
-            <li key={index} className="rounded border py-8 pr-24 pl-4 shadow">
-              <p>
-                <strong>Nome:</strong> {playlist.name ?? "Sem nome"}
-              </p>
-              <p>
-                <strong>Quantidade de músicas:</strong> {playlist.songCount}
-              </p>
+            <li
+              key={index}
+              className="space-y-4 rounded border py-6 pr-24 pl-4 shadow"
+            >
+              <div>
+                <p>
+                  <strong>Nome:</strong> {playlist.name ?? "Sem nome"}
+                </p>
+                <p>
+                  <strong>Quantidade de músicas:</strong> {playlist.songCount}
+                </p>
+              </div>
+
+              <Button
+                variant={"ghost"}
+                onClick={async () => {
+                  await deletePlaylist(playlist.id);
+                  await fetchSongs();
+                }}
+              >
+                <Trash2Icon className="text-red-500" />
+              </Button>
             </li>
           ))}
         </ul>
