@@ -41,9 +41,18 @@ export type GetArtists200Item = {
   albumCount: number;
 };
 
-export type GetArtistsArtistIdSongs200Item = {
+export type GetArtistsArtistIdSongs200SongsItem = {
   id: string;
   title: string;
+};
+
+export type GetArtistsArtistIdSongs200 = {
+  artistName: string;
+  songs: GetArtistsArtistIdSongs200SongsItem[];
+};
+
+export type GetArtistsArtistIdSongs404 = {
+  message: string;
 };
 
 export type GetAlbums200Item = {
@@ -176,7 +185,7 @@ export const getGetArtistsArtistIdSongsUrl = (artistId: string,) => {
   return `http://localhost:3333/artists/${artistId}/songs`
 }
 
-export const getArtistsArtistIdSongs = async (artistId: string, options?: RequestInit): Promise<GetArtistsArtistIdSongs200Item[]> => {
+export const getArtistsArtistIdSongs = async (artistId: string, options?: RequestInit): Promise<GetArtistsArtistIdSongs200> => {
   
   const res = await fetch(getGetArtistsArtistIdSongsUrl(artistId),
   {      
@@ -188,7 +197,7 @@ export const getArtistsArtistIdSongs = async (artistId: string, options?: Reques
 )
 
   const body = [204, 205, 304].includes(res.status) ? null : await res.text()
-  const data: GetArtistsArtistIdSongs200Item[] = body ? JSON.parse(body) : {}
+  const data: GetArtistsArtistIdSongs200 = body ? JSON.parse(body) : {}
 
   return data
 }
