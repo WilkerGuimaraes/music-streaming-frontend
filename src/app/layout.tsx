@@ -30,10 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${oxanium.variable} ${montserrat.variable}`}>
       <body>
-        <SidebarProvider className="py-5">
+        <SidebarProvider className="mx-auto max-w-[1240px] py-5">
           <AppSidebar />
           <main className="flex">
-            <SidebarTrigger />
+            <SidebarTrigger className="ml-4" />
             {children}
           </main>
         </SidebarProvider>
