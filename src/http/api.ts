@@ -91,6 +91,12 @@ export type GetPlaylists200Item = {
   songCount: number;
 };
 
+export type GetPlaylistsPlaylistIdSongsNotInPlaylist200Item = {
+  id: string;
+  title: string;
+  artistName: string;
+};
+
 export type PutPlaylistsPlaylistIdSongsBody = {
   songId: string;
 };
@@ -350,7 +356,7 @@ export const getGetPlaylistsPlaylistIdSongsNotInPlaylistUrl = (playlistId: strin
   return `http://localhost:3333/playlists/${playlistId}/songs/not-in-playlist`
 }
 
-export const getPlaylistsPlaylistIdSongsNotInPlaylist = async (playlistId: string, options?: RequestInit): Promise<void> => {
+export const getPlaylistsPlaylistIdSongsNotInPlaylist = async (playlistId: string, options?: RequestInit): Promise<GetPlaylistsPlaylistIdSongsNotInPlaylist200Item[]> => {
   
   const res = await fetch(getGetPlaylistsPlaylistIdSongsNotInPlaylistUrl(playlistId),
   {      
@@ -362,7 +368,7 @@ export const getPlaylistsPlaylistIdSongsNotInPlaylist = async (playlistId: strin
 )
 
   const body = [204, 205, 304].includes(res.status) ? null : await res.text()
-  const data: void = body ? JSON.parse(body) : {}
+  const data: GetPlaylistsPlaylistIdSongsNotInPlaylist200Item[] = body ? JSON.parse(body) : {}
 
   return data
 }
