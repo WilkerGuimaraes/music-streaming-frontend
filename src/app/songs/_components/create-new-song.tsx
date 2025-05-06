@@ -83,7 +83,7 @@ export function CreateNewSong({ onSuccess }: CreateNewSongProps) {
         </div>
 
         <div className="grid grid-cols-4 items-center gap-3 text-right">
-          <Label htmlFor="albumName">Nome do álbum:</Label>
+          <Label htmlFor="albumTitle">Nome do álbum:</Label>
           <Input
             className="col-span-3"
             id="albumTitle"
