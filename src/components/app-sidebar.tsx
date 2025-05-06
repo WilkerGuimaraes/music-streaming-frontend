@@ -11,6 +11,7 @@ import {
 } from "@/app/_components/ui/sidebar";
 import {
   Home,
+  LibraryBigIcon,
   ListMusicIcon,
   MusicIcon,
   SquareUserRoundIcon,
@@ -26,17 +27,22 @@ const routes = [
   },
   {
     title: "Músicas",
-    url: "#",
+    url: "/songs",
     icon: MusicIcon,
   },
   {
     title: "Artistas",
-    url: "#",
+    url: "/artists",
     icon: SquareUserRoundIcon,
   },
   {
+    title: "Álbuns",
+    url: "/albums",
+    icon: LibraryBigIcon,
+  },
+  {
     title: "Playlists",
-    url: "#",
+    url: "/playlists",
     icon: ListMusicIcon,
   },
 ];
