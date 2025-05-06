@@ -95,6 +95,30 @@ export type PutPlaylistsPlaylistIdSongsBody = {
   songId: string;
 };
 
+export type GetPlaylistsPlaylistIdSongs200SongsItemSongArtist = {
+  name: string;
+};
+
+export type GetPlaylistsPlaylistIdSongs200SongsItemSong = {
+  title: string;
+  artist: GetPlaylistsPlaylistIdSongs200SongsItemSongArtist;
+};
+
+export type GetPlaylistsPlaylistIdSongs200SongsItem = {
+  id: string;
+  song: GetPlaylistsPlaylistIdSongs200SongsItemSong;
+};
+
+export type GetPlaylistsPlaylistIdSongs200 = {
+  playlistId: string;
+  playlistName: string;
+  songs: GetPlaylistsPlaylistIdSongs200SongsItem[];
+};
+
+export type GetPlaylistsPlaylistIdSongs404 = {
+  message: string;
+};
+
 export type PatchPlaylistsPlaylistIdBody = {
   /** @minLength 3 */
   name: string;
@@ -382,7 +406,7 @@ export const getGetPlaylistsPlaylistIdSongsUrl = (playlistId: string,) => {
   return `http://localhost:3333/playlists/${playlistId}/songs`
 }
 
-export const getPlaylistsPlaylistIdSongs = async (playlistId: string, options?: RequestInit): Promise<void> => {
+export const getPlaylistsPlaylistIdSongs = async (playlistId: string, options?: RequestInit): Promise<GetPlaylistsPlaylistIdSongs200> => {
   
   const res = await fetch(getGetPlaylistsPlaylistIdSongsUrl(playlistId),
   {      
@@ -394,7 +418,7 @@ export const getPlaylistsPlaylistIdSongs = async (playlistId: string, options?: 
 )
 
   const body = [204, 205, 304].includes(res.status) ? null : await res.text()
-  const data: void = body ? JSON.parse(body) : {}
+  const data: GetPlaylistsPlaylistIdSongs200 = body ? JSON.parse(body) : {}
 
   return data
 }
