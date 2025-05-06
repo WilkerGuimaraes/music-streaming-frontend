@@ -10,6 +10,7 @@ import { SquarePenIcon, Trash2Icon } from "lucide-react";
 import { deletePlaylist } from "@/app/_actions/delete-playlist";
 import { useState } from "react";
 import UpdatePlaylistContent from "./update-playlist-content";
+import Link from "next/link";
 
 type Playlist = {
   id: string;
@@ -27,7 +28,7 @@ const PlaylistItem = ({ playlist, onPlaylistUpdated }: PlaylistItemProps) => {
   return (
     <li
       key={playlist.id}
-      className="space-y-4 rounded border py-6 pr-24 pl-4 shadow"
+      className="w-[420px] space-y-4 rounded border px-4 py-6 shadow"
     >
       <div>
         <p>
@@ -38,7 +39,14 @@ const PlaylistItem = ({ playlist, onPlaylistUpdated }: PlaylistItemProps) => {
         </p>
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex w-full justify-between">
+        <Button
+          asChild
+          className="cursor-pointer bg-emerald-700 hover:bg-emerald-800"
+        >
+          <Link href={`playlists/${playlist.id}/songs`}>Ver músicas</Link>
+        </Button>
+
         <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
           <DialogTrigger asChild>
             <Button className="cursor-pointer bg-slate-600 hover:bg-slate-700">

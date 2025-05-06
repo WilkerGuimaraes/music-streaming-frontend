@@ -28,7 +28,7 @@ const PlaylistsPage = () => {
   }, []);
 
   return (
-    <div className="mx-auto max-w-3xl px-6">
+    <div className="mx-auto max-w-4xl px-6">
       <div className="flex justify-between">
         <h1 className="mb-4 text-2xl font-bold">Playlists</h1>
 
